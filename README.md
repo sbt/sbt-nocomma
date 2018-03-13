@@ -1,6 +1,8 @@
 sbt-nocomma
 ===========
 
+[![Build Status](https://travis-ci.org/sbt/sbt-nocomma.svg?branch=master)](https://travis-ci.org/sbt/sbt-nocomma)
+
 sbt-nocomma reduces commas from your build.sbt.
 
 setup
