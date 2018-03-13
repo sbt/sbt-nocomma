@@ -13,10 +13,10 @@ class NoCommaSpec extends FlatSpec with Matchers {
       name := "something",
       organization in ThisBuild := "com.example",
     )
-    assert((xs map { _.key }) === (ys map { _.key }) )
+    assert((xs map { _.key }) === (ys map { _.key }))
   }
 
-/*
+  /*
   "nocomma" should "expand to a Vector" in {
     assert(List(nocomma {
       f1
@@ -37,5 +37,5 @@ class NoCommaSpec extends FlatSpec with Matchers {
   }
 
   def f1 = 1
-*/
+ */
 }
