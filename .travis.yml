@@ -2,4 +2,4 @@ language: scala
 sudo: false
 jdk: oraclejdk8
 script:
-- sbt test scripted
+- sbt scalafmt::test test:scalafmt::test sbt:scalafmt::test test scripted
