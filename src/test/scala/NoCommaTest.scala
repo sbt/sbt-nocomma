@@ -5,15 +5,20 @@ import sbt._, Keys._
 
 class NoCommaSpec extends FlatSpec with Matchers {
   "nocomma" should "expand to a Vector" in {
+    val seq = Seq(
+      scalacOptions += "-deprecation"
+    )
     val xs = nocomma {
+      seq
       name := "something"
       organization in ThisBuild := "com.example"
     }
-    val ys = Vector(
+    val ys = Vector[SettingsDefinition](
+      seq,
       name := "something",
       organization in ThisBuild := "com.example",
     )
-    assert((xs map { _.key }) === (ys map { _.key }))
+    assert((xs map { _.key }) === (ys flatMap { _.settings.map(_.key) }))
   }
 
   /*

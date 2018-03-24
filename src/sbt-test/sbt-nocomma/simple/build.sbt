@@ -1,8 +1,13 @@
 lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4"
 lazy val check = taskKey[Unit]("")
 
+val commonSettings = Seq(
+  scalacOptions += "-deprecation"
+)
+
 lazy val root = (project in file("."))
   .settings(nocomma {
+    commonSettings
     ThisBuild / organization := "com.eed3si9n"
     ThisBuild / scalaVersion := "2.12.4"
 
