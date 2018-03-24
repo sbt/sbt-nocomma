@@ -9,7 +9,7 @@ lazy val root = (project in file("."))
     ThisBuild / scalafmtOnCompile := true,
     ThisBuild / Sbt / scalafmtOnCompile := false,
 
-    ThisBuild / version := "0.1.0",
+    ThisBuild / version := "0.1.1-SNAPSHOT",
 
     name := "sbt-nocomma",
     description := "sbt plugin to reduce commas from your build.sbt",
