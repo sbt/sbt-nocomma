@@ -23,13 +23,15 @@ This introduces `nocomma { ... }` macro that returns `Vector[Setting[_]]`.
 ```scala
 import Dependencies._
 
+ThisBuild / organization := "com.example"
+ThisBuild / scalaVersion := "3.0.1"
+ThisBuild / version      := "0.1.0-SNAPSHOT"
+
 lazy val root = (project in file("."))
   .settings(nocomma {
-    ThisBuild / organization := "com.example"
-    ThisBuild / scalaVersion := "2.12.4"
-    ThisBuild / version      := "0.1.0-SNAPSHOT"
 
     name := "Hello"
+    scalacOptions += "-Ykind-projector"
 
     // comment works
     libraryDependencies += scalaTest % Test
