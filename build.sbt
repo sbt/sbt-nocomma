@@ -1,4 +1,4 @@
-lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4"
+lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4" % Test
 
 lazy val root = (project in file("."))
   .enablePlugins(ScriptedPlugin)
