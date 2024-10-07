@@ -1,4 +1,4 @@
-lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4"
+lazy val scalaTest = "org.scalatest" %% "scalatest-flatspec" % "3.2.19"
 
 ThisBuild / organization := "com.eed3si9n"
 ThisBuild / scalaVersion := "2.12.8"
@@ -11,14 +11,24 @@ lazy val root = (project in file("."))
   .settings(
     name := "sbt-nocomma",
     libraryDependencies ++= Vector(scalaTest % Test),
-    libraryDependencies += "org.scala-lang" % "scala-compiler" % scalaVersion.value,
-    scriptedLaunchOpts := { scriptedLaunchOpts.value ++
-      Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
+    libraryDependencies ++= {
+      scalaBinaryVersion.value match {
+        case "3" =>
+          Nil
+        case _ =>
+          Seq("org.scala-lang" % "scala-compiler" % scalaVersion.value)
+      }
+    },
+    scriptedLaunchOpts := {
+      scriptedLaunchOpts.value ++
+        Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
     },
     scriptedBufferLog := false,
+    crossScalaVersions += "3.3.4",
     (pluginCrossBuild / sbtVersion) := {
       scalaBinaryVersion.value match {
         case "2.12" => "1.2.8"
+        case _      => "2.0.0-M2"
       }
     },
   )
@@ -39,7 +49,9 @@ ThisBuild / developers := List(
 )
 ThisBuild / description := "sbt plugin to reduce commas from your build.sbt"
 ThisBuild / homepage := Some(url("https://github.com/sbt/sbt-nocomma"))
-ThisBuild / licenses := Seq("Apache-2.0" -> url("https://github.com/sbt/sbt-nocomma/blob/master/LICENSE"))
+ThisBuild / licenses := Seq(
+  "Apache-2.0" -> url("https://github.com/sbt/sbt-nocomma/blob/master/LICENSE")
+)
 ThisBuild / pomIncludeRepository := { _ => false }
 ThisBuild / publishTo := {
   val nexus = "https://oss.sonatype.org/"
@@ -58,8 +70,7 @@ def pomConsistency2021DraftSettings: Seq[Setting[_]] = Seq(
   pomConsistency2021Draft := Set("true", "1")(sys.env.get("POM_CONSISTENCY").getOrElse("false")),
   moduleName := {
     if (pomConsistency2021Draft.value)
-      sbtPluginModuleName2021Draft(moduleName.value,
-        (pluginCrossBuild / sbtBinaryVersion).value)
+      sbtPluginModuleName2021Draft(moduleName.value, (pluginCrossBuild / sbtBinaryVersion).value)
     else moduleName.value
   },
   projectID := {
@@ -73,4 +84,4 @@ def sbtPluginModuleName2021Draft(n: String, sbtV: String): String =
 
 def sbtPluginExtra2021Draft(m: ModuleID): ModuleID =
   m.withExtraAttributes(Map.empty)
-   .withCrossVersion(CrossVersion.binary)
+    .withCrossVersion(CrossVersion.binary)
