@@ -31,5 +31,5 @@ object NoComma {
         Select(reify(Vector).tree, TermName("apply")),
         items))
   }
- */
+   */
 }

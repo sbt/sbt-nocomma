@@ -22,7 +22,7 @@ jobs:
       uses: coursier/cache-action@v6
     - name: Build and test
       run: |
-        sbt -v clean scalafmt::test test:scalafmt::test sbt:scalafmt::test test scripted
+        sbt -v clean scalafmtSbtCheck "+ scalafmtCheckAll" "+ test" "+ scripted"
         rm -rf "$HOME/.ivy2/local" || true
         find $HOME/Library/Caches/Coursier/v1        -name "ivydata-*.properties" -delete || true
         find $HOME/.ivy2/cache                       -name "ivydata-*.properties" -delete || true
