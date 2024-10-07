@@ -1,7 +1,8 @@
 sbt-nocomma
 ===========
 
-[![Build Status](https://travis-ci.org/sbt/sbt-nocomma.svg?branch=master)](https://travis-ci.org/sbt/sbt-nocomma)
+[![CI](https://github.com/sbt/sbt-nocomma/actions/workflows/ci.yml/badge.svg)](https://github.com/sbt/sbt-nocomma/actions/workflows/ci.yml)
+[![Latest version](https://img.shields.io/github/tag/sbt/sbt-nocomma.svg)](https://index.scala-lang.org/sbt/sbt-nocomma)
 
 sbt-nocomma reduces commas from your build.sbt.
 
@@ -11,7 +12,7 @@ setup
 sbt-nocomma is available for sbt 1.x. Put the following to `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("com.eed3si9n" % "sbt-nocomma" % "0.1.0")
+addSbtPlugin("com.eed3si9n" % "sbt-nocomma" % "x.y.z")
 ```
 
 usage
