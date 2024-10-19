@@ -20,6 +20,7 @@ jobs:
         distribution: adopt
     - name: Coursier cache
       uses: coursier/cache-action@v6
+    - uses: sbt/setup-sbt@v1
     - name: Build and test
       run: |
         sbt -v clean scalafmtSbtCheck "+ scalafmtCheckAll" "+ test" "+ scripted"
