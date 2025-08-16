@@ -2,6 +2,7 @@ import org.scalatest.flatspec._
 
 import sbtnocomma.NoComma._
 import sbt._, Keys._
+import sjsonnew.BasicJsonProtocol._
 
 class NoCommaSpec extends AnyFlatSpec {
   "nocomma" should "expand to a Vector" in {
