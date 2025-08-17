@@ -7,7 +7,6 @@ ThisBuild / version := "0.1.3-SNAPSHOT"
 
 lazy val root = (project in file("."))
   .enablePlugins(SbtPlugin)
-  .settings(pomConsistency2021DraftSettings)
   .settings(
     name := "sbt-nocomma",
     libraryDependencies ++= Vector(scalaTest % Test),
@@ -28,7 +27,7 @@ lazy val root = (project in file("."))
     (pluginCrossBuild / sbtVersion) := {
       scalaBinaryVersion.value match {
         case "2.12" => "1.2.8"
-        case _      => "2.0.0-RC2"
+        case _      => "2.0.0-RC3"
       }
     },
   )
@@ -49,39 +48,12 @@ ThisBuild / developers := List(
 )
 ThisBuild / description := "sbt plugin to reduce commas from your build.sbt"
 ThisBuild / homepage := Some(url("https://github.com/sbt/sbt-nocomma"))
-ThisBuild / licenses := Seq(
-  "Apache-2.0" -> url("https://github.com/sbt/sbt-nocomma/blob/master/LICENSE")
-)
+ThisBuild / licenses := Seq(License.Apache2)
 ThisBuild / pomIncludeRepository := { _ => false }
 ThisBuild / publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+  val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
+  val v                = (ThisBuild / version).value
+  if (v.endsWith("SNAPSHOT")) Some("central-snapshots" at centralSnapshots)
+  else localStaging.value
 }
 ThisBuild / publishMavenStyle := true
-
-// See https://eed3si9n.com/pom-consistency-for-sbt-plugins
-lazy val pomConsistency2021Draft = settingKey[Boolean]("experimental")
-
-/**
- * this is an unofficial experiment to re-publish plugins with better Maven compatibility
- */
-def pomConsistency2021DraftSettings: Seq[Setting[_]] = Seq(
-  pomConsistency2021Draft := Set("true", "1")(sys.env.get("POM_CONSISTENCY").getOrElse("false")),
-  moduleName := {
-    if (pomConsistency2021Draft.value)
-      sbtPluginModuleName2021Draft(moduleName.value, (pluginCrossBuild / sbtBinaryVersion).value)
-    else moduleName.value
-  },
-  projectID := {
-    if (pomConsistency2021Draft.value) sbtPluginExtra2021Draft(projectID.value)
-    else projectID.value
-  },
-)
-
-def sbtPluginModuleName2021Draft(n: String, sbtV: String): String =
-  s"""${n}_sbt${if (sbtV == "1.0") "1" else if (sbtV == "2.0") "2" else sbtV}"""
-
-def sbtPluginExtra2021Draft(m: ModuleID): ModuleID =
-  m.withExtraAttributes(Map.empty)
-    .withCrossVersion(CrossVersion.binary)
