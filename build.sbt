@@ -27,7 +27,7 @@ lazy val root = (project in file("."))
     (pluginCrossBuild / sbtVersion) := {
       scalaBinaryVersion.value match {
         case "2.12" => "1.2.8"
-        case _      => "2.0.0-RC2"
+        case _      => "2.0.0-RC3"
       }
     },
   )
@@ -52,7 +52,7 @@ ThisBuild / licenses := Seq(License.Apache2)
 ThisBuild / pomIncludeRepository := { _ => false }
 ThisBuild / publishTo := {
   val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
-  val v = (ThisBuild / version).value
+  val v                = (ThisBuild / version).value
   if (v.endsWith("SNAPSHOT")) Some("central-snapshots" at centralSnapshots)
   else localStaging.value
 }
