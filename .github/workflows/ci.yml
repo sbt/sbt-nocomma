@@ -13,7 +13,7 @@ jobs:
     - name: Setup Scala
       uses: actions/setup-java@v4
       with:
-        java-version: 8
+        java-version: 17
         distribution: zulu
         cache: sbt
     - uses: sbt/setup-sbt@v1
