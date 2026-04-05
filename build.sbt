@@ -3,7 +3,6 @@ lazy val scalaTest = "org.scalatest" %% "scalatest-flatspec" % "3.2.19"
 organization := "com.eed3si9n"
 scalaVersion := "3.8.2"
 scalafmtOnCompile := true
-version := "0.1.3-SNAPSHOT"
 
 lazy val root = rootProject
   .enablePlugins(SbtPlugin)
