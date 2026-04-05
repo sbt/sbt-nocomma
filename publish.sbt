@@ -1,3 +1,4 @@
+ThisBuild / dynverSonatypeSnapshots := true
 scmInfo := Some(
   ScmInfo(
     url("https://github.com/sbt/sbt-nocomma"),
@@ -18,7 +19,7 @@ licenses := Seq(License.Apache2)
 pomIncludeRepository := { _ => false }
 publishTo := {
   val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
-  val v                = (ThisBuild / version).value
+  val v                = version.value
   if (v.endsWith("SNAPSHOT")) Some("central-snapshots" at centralSnapshots)
   else localStaging.value
 }
