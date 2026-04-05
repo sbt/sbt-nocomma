@@ -23,7 +23,7 @@ lazy val root = (project in file("."))
         Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
     },
     scriptedBufferLog := false,
-    crossScalaVersions += "3.8.1",
+    crossScalaVersions += "3.8.2",
     scalacOptions ++= {
       scalaBinaryVersion.value match {
         case "2.12" =>
@@ -35,7 +35,7 @@ lazy val root = (project in file("."))
     (pluginCrossBuild / sbtVersion) := {
       scalaBinaryVersion.value match {
         case "2.12" => "1.4.9"
-        case _      => "2.0.0-RC9"
+        case _      => "2.0.0-RC10"
       }
     },
   )
