@@ -1,7 +1,7 @@
 lazy val scalaTest = "org.scalatest" %% "scalatest-flatspec" % "3.2.19"
 
 ThisBuild / organization := "com.eed3si9n"
-ThisBuild / scalaVersion := "2.12.21"
+ThisBuild / scalaVersion := "3.8.2"
 ThisBuild / scalafmtOnCompile := true
 ThisBuild / version := "0.1.3-SNAPSHOT"
 
@@ -23,7 +23,7 @@ lazy val root = (project in file("."))
         Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
     },
     scriptedBufferLog := false,
-    crossScalaVersions += "3.8.2",
+    crossScalaVersions += "2.12.21",
     scalacOptions ++= {
       scalaBinaryVersion.value match {
         case "2.12" =>
@@ -34,7 +34,7 @@ lazy val root = (project in file("."))
     },
     (pluginCrossBuild / sbtVersion) := {
       scalaBinaryVersion.value match {
-        case "2.12" => "1.4.9"
+        case "2.12" => "1.10.9"
         case _      => "2.0.0-RC10"
       }
     },
