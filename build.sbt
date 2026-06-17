@@ -1,7 +1,7 @@
 lazy val scalaTest = "org.scalatest" %% "scalatest-flatspec" % "3.2.19"
 
 organization := "com.eed3si9n"
-scalaVersion := "3.8.2"
+scalaVersion := "3.8.4"
 scalafmtOnCompile := true
 
 lazy val root = rootProject
@@ -34,7 +34,7 @@ lazy val root = rootProject
     (pluginCrossBuild / sbtVersion) := {
       scalaBinaryVersion.value match {
         case "2.12" => "1.10.9"
-        case _      => "2.0.0-RC10"
+        case _      => "2.0.0"
       }
     },
   )
