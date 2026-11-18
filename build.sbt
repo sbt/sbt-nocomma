@@ -10,32 +10,29 @@ lazy val root = rootProject
     name := "sbt-nocomma",
     libraryDependencies ++= Vector(scalaTest % Test),
     libraryDependencies ++= {
-      scalaBinaryVersion.value match {
+      scalaBinaryVersion.value match
         case "3" =>
           Nil
         case _ =>
           Seq("org.scala-lang" % "scala-compiler" % scalaVersion.value)
-      }
     },
     scriptedLaunchOpts := {
       scriptedLaunchOpts.value ++
         Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
     },
-    scriptedSbt := (if (scalaBinaryVersion.value == "2.12") "1.13.1" else "2.1.0"),
+    scriptedSbt := (if scalaBinaryVersion.value == "2.12" then "1.13.1" else "2.1.0"),
     scriptedBufferLog := false,
     crossScalaVersions := Seq("3.9.0", "2.12.21"),
     scalacOptions ++= {
-      scalaBinaryVersion.value match {
+      scalaBinaryVersion.value match
         case "2.12" =>
           Seq("-Xsource:3", "-release:8")
         case _ =>
           Nil
-      }
     },
     (pluginCrossBuild / sbtVersion) := {
-      scalaBinaryVersion.value match {
+      scalaBinaryVersion.value match
         case "2.12" => "1.10.9"
         case _      => "2.1.0"
-      }
     },
   )
