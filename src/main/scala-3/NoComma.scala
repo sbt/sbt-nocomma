@@ -5,6 +5,7 @@ import scala.quoted.Expr
 import scala.quoted.Quotes
 import scala.quoted.Varargs
 
+
 object NoComma {
   inline def nocomma(inline a: SettingsDefinition): Vector[Setting[?]] =
     ${ nocommaImpl('a) }

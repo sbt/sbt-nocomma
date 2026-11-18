@@ -1,0 +1,6 @@
+dialect = "scala212source3"
+
+exclude-paths = [
+  # Scripted tests start from unformatted sources on purpose.
+  "glob:**/sbt-test/**",
+]

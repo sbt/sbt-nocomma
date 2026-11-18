@@ -1,15 +1,16 @@
 package sbtnocomma
 
-import sbt._
+import sbt.*
 import scala.language.experimental.macros
 import scala.reflect.macros.blackbox.Context
 
+
 object NoComma {
-  def nocomma(a: SettingsDefinition): Vector[Setting[_]] =
+  def nocomma(a: SettingsDefinition): Vector[Setting[?]] =
     macro nocommaImpl
 
   def nocommaImpl(c: Context)(a: c.Tree): c.Tree = {
-    import c.universe._
+    import c.universe.*
     val items: List[Tree] = a match {
       case Block(stats, x) => stats ::: List(x)
       case x               => List(x)
