@@ -5,6 +5,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [17, 21, 25]
     env:
       JAVA_OPTS: -Xms2048M -Xmx2048M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
     steps:
@@ -13,7 +17,7 @@ jobs:
     - name: Setup Scala
       uses: actions/setup-java@v5
       with:
-        java-version: 17
+        java-version: ${{ matrix.java }}
         distribution: zulu
         cache: sbt
     - uses: sbt/setup-sbt@v1
